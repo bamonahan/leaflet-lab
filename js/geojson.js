@@ -19,30 +19,31 @@ function createMap(){
 		//calls the function getData
 };
 
+function createPropSymbols(data, map){
+	var geojsonMarkerOptions = {
+		radius: 8,
+		fillColor: "#ff7800",
+		color: "#000",
+		weight: 1,
+		opacity: 1,
+		fillOpacity: 0.8
+	};
+
+	//create a Leaflet GeoJSON layer and add it to the map
+    L.geoJson(data, {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, geojsonMarkerOptions);
+        }
+    }).addTo(map);
+}
 
 function getData(map){
-//function that retrieves the data and places it on the map
+//load the data
     $.ajax("data/MegaCities.geojson", {
         dataType: "json",
         success: function(response){
 				//loads the data from MegaCities.geojson
-
-					var geojsonMarkerOptions = {
-            radius: 8,
-            fillColor: "#ff7800",
-            color: "#000",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 0.8
-          };
-					//defines the settings for the markers
-
-          L.geoJson(response, {
-            pointToLayer: function (feature, latlng){
-              return L.circleMarker(latlng, geojsonMarkerOptions);
-						}
-          }).addTo(map);
-					//adds the marker settings to the map
+					createPropSymbols(response, map);
 	        }
 	    });
 }
