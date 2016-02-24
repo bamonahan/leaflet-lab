@@ -42,8 +42,8 @@ function pointToLayer(feature, latlng){
 	var attribute = "Pop1950";
   //determines which attribute to visualize with proportional symbol
 
-  var options = {
-    fillColor: "ff7800",
+	var options = {
+    fillColor: "#33adff",
     color: "#000",
     weight: 1,
     opacity: 1,
@@ -60,15 +60,26 @@ function pointToLayer(feature, latlng){
   var layer = L.circleMarker(latlng, options);
   //creates circle marker layer
 
-  var popupContent = "<p><b>City:</b> " + feature.properties.City + "</p>";
+  var popupContent = "<p><b>City:</b> " + feature.properties.City + ", " + feature.properties.State + "</p>";
   //builds the popup content string, staring with the city
 
   var year = attribute.split("Pop")[1];
   popupContent += "<p><b>Population in " + year + ":</b> " + feature.properties[attribute] +  " </p>";
   //adds the year to the popup, formatted to include just the year number
 
-  layer.bindPopup(popupContent);
+  layer.bindPopup(popupContent, {
+		offset: new L.point(0,-options.radius)
+	});
   //binds the popup to the circle marker
+
+	layer.on({
+		mouseover: function(){
+			this.openPopup();
+		},
+		mouseout: function(){
+			this.closePopup();
+		}
+	});
 
   return layer;
   //returns the circle marker to the L.geoJson pointToLayer option
