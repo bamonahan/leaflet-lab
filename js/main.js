@@ -16,8 +16,9 @@ function createMap(){
 
 	L.tileLayer('http://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		maxZoom: 7
     }).addTo(map);
-		//adds the Open Street Map tile set
+		//adds the Open Street Map tile set, restricts zoom
 
 		getData(map);
 		//calls the function getData
@@ -106,9 +107,9 @@ function pointToLayer(feature, latlng, attributes){
 		mouseout: function(){
 			this.closePopup();
 		},
-		click: function(){
-			$("#panel").html(popupContent);
-		}
+		//click: function(){
+			//$("#panel").html(popupContent);
+		//}
 	});
 	//opens popup on hover
 
@@ -287,6 +288,12 @@ function processData(data){
 
 	return attributes;
 };
+
+$('.menu-ui a').on('click', function() {
+		var filter = $(this).data('filter');
+		$(this).addClass('active').siblings().removeClass('active');
+});
+//fifth interaction operator
 
 function getData(map){
 //import geojson data
