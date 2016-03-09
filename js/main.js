@@ -77,20 +77,11 @@ var growingCities = feature.properties.growing === "true";
 
 console.log(growingCities);
 	var options = {
-	//	if (feature.properties.growing = "true"){
     fillColor: "#00b3b3",
     color: "#000",
     weight: 1,
     opacity: 1,
     fillOpacity: 0.7
-	// }
-	// else {
-	// 	fillColor: "#330033",
-  //   color: "#000",
-  //   weight: 1,
-  //   opacity: 1,
-  //   fillOpacity: 0.8
-	// }
   };
   //creates the options for the markers
 
@@ -99,12 +90,6 @@ console.log(growingCities);
 
   options.radius = calcPropRadius(attValue);
   //gives each feature's circle marker a radius based on its attribute value
-
-	// if (feature.properties.growing === "true") {
-	// 	options.class = "growing";
-	// } else if (feature.properties.growing === "false") {
-	// 	options.class = "declining";
-	// }
 
   var layer = L.circleMarker(latlng, options);
 	console.log(layer);
@@ -356,30 +341,6 @@ function processData(data){
 	return attributes;
 };
 
-// function createButtons(attributes) {
-// 	$('.menu-ui a').on('click', function() {
-// 			var filter = $(this).data('filter');
-// 			$(this).addClass('active').siblings().removeClass('active');
-// 			if (filter === "all") {
-// 				//console.log(filter);
-// 				//show all the cities
-// 			} else if (filter === "growing") {
-// 				filter function(attributes){
-// 					return feature.properties.growing;
-// 				}
-// 				//console.log(filter);
-// 				//show cities where growing === true
-// 			} else if (filter === "declining") {
-// 				filter function(attributes){
-// 					return feature.properties.growing = false;
-// 				}
-// 				//show cities where growing === false
-// 				// console.log(filter);
-// 			}
-// 	});
-// }
-// fifth interaction operator
-
 function getData(map){
 //import geojson data
     $.ajax("data/USCitiesPop.geojson", {
@@ -388,42 +349,9 @@ function getData(map){
 				//loads the data from USCitiesPop.geojson
 					var attributes = processData(response);
 
-					// function createButtons(attributes) {
-					// 	$('.menu-ui a').on('click', function() {
-					// 			var filter = $(this).data('filter');
-					// 			$(this).addClass('active').siblings().removeClass('active');
-					// 			if (filter === "all") {
-					//
-					// 				//createPropSymbols(response, map, attributes);
-					// 				//console.log(filter);
-					// 				//show all the cities
-					// 			} else if (filter === "growing") {
-					//
-					// 				growingCities = L.geoJson(response, {
-			    //             filter: function(feature, layer) {
-			    //                 return feature.properties.growing === "true";
-					// 									createPropSymbols(response, map, attributes);
-					// 				}
-					// 			});
-					// 				//console.log(filter);
-					// 				//show cities where growing === true
-					// 			} else if (filter === "declining") {
-					// 			// 	L.geoJson(response, {
-					// 			// 			filter: function(feature, layer) {
-					// 			// 				createPropSymbols(response, map, attributes);
-					// 			// 					return feature.properties.growing === "false";
-					// 			// 	}
-					// 			// })
-					// 				//show cities where growing === false
-					// 				// console.log(filter);
-					// 			}
-					// 	});
-					// }
-
 					createPropSymbols(response, map, attributes);
 					createSequenceControls(map, attributes);
 					createLegend(map, attributes);
-					//createButtons(attributes);
 					//create an attributes array
 	        }
 	    });
