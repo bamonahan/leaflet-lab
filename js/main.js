@@ -1,4 +1,3 @@
-//leaflet map with my data
 /* My map will show ten cities (in the area commonly known as the Rust Belt) that
 have seen serious populaiton decline since 1950, as well as ten cities that have
 seen major population growth in that time period, to contrast. Population data was obtained
@@ -389,45 +388,42 @@ function getData(map){
 				//loads the data from USCitiesPop.geojson
 					var attributes = processData(response);
 
-					function createButtons(attributes) {
-						$('.menu-ui a').on('click', function() {
-								var filter = $(this).data('filter');
-								$(this).addClass('active').siblings().removeClass('active');
-								if (filter === "all") {
-
-									//createPropSymbols(response, map, attributes);
-									//console.log(filter);
-									//show all the cities
-								} else if (filter === "growing") {
-
-									growingCities = L.geoJson(response, {
-			                filter: function(feature, layer) {
-			                    return feature.properties.growing === "true";
-														createPropSymbols(response, map, attributes);
-									}
-								});
-
-								growingCities.addTo(map);
-								console.log(growingCities);
-									//console.log(filter);
-									//show cities where growing === true
-								} else if (filter === "declining") {
-								// 	L.geoJson(response, {
-								// 			filter: function(feature, layer) {
-								// 				createPropSymbols(response, map, attributes);
-								// 					return feature.properties.growing === "false";
-								// 	}
-								// })
-									//show cities where growing === false
-									// console.log(filter);
-								}
-						});
-					}
+					// function createButtons(attributes) {
+					// 	$('.menu-ui a').on('click', function() {
+					// 			var filter = $(this).data('filter');
+					// 			$(this).addClass('active').siblings().removeClass('active');
+					// 			if (filter === "all") {
+					//
+					// 				//createPropSymbols(response, map, attributes);
+					// 				//console.log(filter);
+					// 				//show all the cities
+					// 			} else if (filter === "growing") {
+					//
+					// 				growingCities = L.geoJson(response, {
+			    //             filter: function(feature, layer) {
+			    //                 return feature.properties.growing === "true";
+					// 									createPropSymbols(response, map, attributes);
+					// 				}
+					// 			});
+					// 				//console.log(filter);
+					// 				//show cities where growing === true
+					// 			} else if (filter === "declining") {
+					// 			// 	L.geoJson(response, {
+					// 			// 			filter: function(feature, layer) {
+					// 			// 				createPropSymbols(response, map, attributes);
+					// 			// 					return feature.properties.growing === "false";
+					// 			// 	}
+					// 			// })
+					// 				//show cities where growing === false
+					// 				// console.log(filter);
+					// 			}
+					// 	});
+					// }
 
 					createPropSymbols(response, map, attributes);
 					createSequenceControls(map, attributes);
 					createLegend(map, attributes);
-					createButtons(attributes);
+					//createButtons(attributes);
 					//create an attributes array
 	        }
 	    });

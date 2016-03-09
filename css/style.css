@@ -1,6 +1,6 @@
 
 #map {
-  height: 650px;
+  height: 658px;
   width: 68.5%;
   display: inline-block;
   float: right;
@@ -20,7 +20,7 @@
 
 #panel {
   width: 29.5%;
-  height: 640px;
+  height: 650px;
   font-family: sans-serif;
   float: left;
   display: inline-block;
@@ -30,7 +30,7 @@
   background-color: #737373;
   color: white;
   overflow: scroll;
-  padding: 2px;
+  padding: 3px;
   border: solid gray 1px;
 }
 
@@ -65,7 +65,7 @@ hr {
   font-size: 18px;
   text-align: center;
   position: relative;
-  top: 9px;
+  top: 7px;
   color: #00b3b3;
 }
 
