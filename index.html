@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
-		<title>Population Growth and Decline in the US, 1950-2010</title>
+		<title>Population Growth and Decline in American Cities, 1950-2010</title>
 
 		<!--put your external stylesheet links here-->
 		<link rel="stylesheet" href="lib/leaflet/leaflet.css">
@@ -23,8 +23,76 @@
 		</nav>
 		<!--menu for filter operator-->
 
+		<div id = "header">
+			<div id = "title">
+			<h2>Population Growth and Decline in American Cities, 1950-2010</h2>
+			</div>
+		</div>
+		<div id = "panel">
+			<div id = "ptext">
+				<p><font size="2.25">Since 1950, several once populous cities have <b>lost have lost about half of
+					their populations</b>, while others have experienced <b>exponential growth</b>; the map on the right
+				includes ten examples of each.</p>
+				<h2>How many people did these cities lose/gain between 1950 and 2010?</h2>
+					<div id = "lossList">
+					<ul>
+						<font color="white">
+						<li><b>St. Louis, MO</b>: <font color="#ff8080">-537,502</font> (63% loss)</li>
+						<li><b>Detroit, MI</b>: <font color="#ff8080">-1,135,791</font> (61% loss)</li>
+						<li><b>Cleveland, OH</b>: <font color="#ff8080">-517,993</font> (57% loss)</li>
+						<li><b>Gary, IN</b>*: <font color="#ff8080">-98,026</font> (55% loss)</li>
+						<li><b>Pittsburgh, PA</b>: <font color="#ff8080">-371,102</font> (55% loss)</li>
+						<li><b>Buffalo, NY</b>: <font color="#ff8080">-318,833</font> (55% loss)</li>
+						<li><b>Niagara Falls, NY</b>*: <font color="#ff8080">-52,201</font> (51% loss)</li>
+						<li><b>Flint, MI</b>*: <font color="#ff8080">-94,506</font> (48% loss)</li>
+						<li><b>Dayton, OH</b>*: <font color="#ff8080">-120,805</font> (46% loss)</li>
+						<li><b>Cincinnati, OH</b>: <font color="#ff8080">-207,053</font> (41% loss)</li>
+					</font>
+					</ul>
+				</div>
+				<div id = "gainList">
+					<ul>
+						<li><b>Las Vegas, NV</b>: <font color="#99ffbb">+559,132 </font>(2271% increase)</li>
+						<li><b>Phoenix, AZ</b>: <font color="#99ffbb">+1,228,814 </font>(1253% increase)</li>
+						<li><b>San Jose, CA</b>: <font color="#99ffbb">+850,662 </font>(893% increase)</li>
+						<li><b>Raleigh, NC</b>: <font color="#99ffbb">+338,213 </font>(515% increase)</li>
+						<li><b>Austin, TX</b>: <font color="#99ffbb">+657,931 </font>(497% increase)</li>
+						<li><b>Charlotte, NC</b>: <font color="#99ffbb">+597,381 </font>(445% increase)</li>
+						<li><b>San Diego, CA</b>: <font color="#99ffbb">+973,015 </font>(291% increase)</li>
+						<li><b>Houston, TX</b>: <font color="#99ffbb">+1,504,100 </font>(252% increase)</li>
+						<li><b>San Antonio, TX</b>: <font color="#99ffbb">+918,965 </font>(225% increase)</li>
+						<li><b>Dallas, TX</b>: <font color="#99ffbb">+763,354 </font>(176% increase)</li>
+					</ul>
+				</div>
+				<div id = "break"></div>
+				<div id = "break2"></div>
+				<p><font size="1">*The populations of these cities peaked in 1960, not 1950.</font></p>
+				<hr>
+				<div>
+				<h3>Reasons for population decrease:</h3>
+					<h4>Suburbanization</h4>
+						<p>Following World War II, people began leaving cities for the new
+							housing found in suburbs. The construction of the Interstate System
+							allowed people to easily commute to their city jobs from their new
+							homes. </p>
+					<h4>Deindustrialization</h4>
+						<p>The decline of the industrial sector led to severe population
+							loss, as well as economic decline. Industries that saw major decline
+							following World War II include steel (affecting Pittsburgh and Columbus, among others)
+							and the auto industry (affecting Detroit).
+						</p>
+					</div>
+				<h3 style="page-">Reasons for population increase:</h3>
+				<h4>Locations of Growing Industries</h4>
+				<p>Many cities experiencing exponential growth are homes to industries that
+					have also seen much growth in recent years, including the technology
+					industry and the banking industry. </p>
+				<h4>Reason 2</h4>
+				<p>Reason reason reason reason reason reason reason reason reason reason
+					reason reason reason reason reason reason reason reason reason reason reason</p>
+			</div>
+		</div>
 		<div id = "map"></div>
-		<div id = "panel"></div>
 
 		<script>
 

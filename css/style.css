@@ -1,23 +1,85 @@
 
 #map {
-  height: 400px;
+  height: 650px;
+  width: 68.5%;
+  display: inline-block;
+  float: right;
+  position: relative;
+}
+
+#header {
+	z-index: 1;
+	position: relative;
+	width: 100%;
+	margin-top: -20px;
+	height: 90px;
+	background-color: #333333;
+	margin-bottom: 10px;
+}
+
+#panel {
+  width: 29.5%;
+  height: 640px;
+  font-family: sans-serif;
+  float: left;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  position: fixed;
+  background-color: #737373;
+  color: white;
+  overflow: scroll;
+  padding: 5px;
+}
+
+#panel p {
+  font-size: 12px;
+}
+
+li {
+  text-align: left;
+  color: #333333;
+  font-size: 12px;
+}
+
+#lossList li {
+  color: white;
+}
+
+#gainList li {
+  color: white;
+}
+
+hr {
+  width: 75%;
+}
+
+/*#gainList {
+  width: 70%;
+  /*height: 290px;*/
+  /*height: 32%;
+  background-color: #e6ffff;
+  display: inline-block;
+  color: #333333;
+  margin-right: 14px;
+  align-self: center;
+}*/
+
+#title {
+  font-family: sans-serif;
+  font-size: 18px;
+  text-align: center;
+  position: relative;
+  top: 25px;
+  color: white;
 }
 
 .leaflet-popup-content p {
   margin: 0.2em 0;
 }
 
-#panel {
-  width: 26%;
-  padding: 20px;
-  display: inline-block;
-  vertical-align: top;
-  text-align: center;
-  line-height: 42px;
-}
-
 .range-slider {
-  width: 50%;
+  width: 150px;
 }
 
 #forward {
@@ -28,10 +90,31 @@
   float: left;
 }
 
+.sequence-control-container {
+  width: 250px;
+  height: 30px;
+  background-color: #e6ffff;
+  padding: 10px;
+  line-height: 45px;
+  text-align: center;
+  border: solid gray 1px;
+  opacity: 70%;
+}
+
+.legend-control-container {
+  width: 150px;
+  background-color: #e6ffff;
+  border: solid gray 1px;
+}
+
+.legend-control-container h3 {
+  text-align: center;
+}
+
 .menu-ui {
   background:#fff;
   position:absolute;
-  top:20px;right:20px;
+  top:110px;right:30px;
   z-index:1;
   border-radius:3px;
   width:120px;

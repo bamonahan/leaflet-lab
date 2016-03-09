@@ -5,20 +5,23 @@ seen major population growth in that time period, to contrast. Population data w
 from the census bureau; time stamps are from the first year of every decade
 since 1950. */
 
+var growingCities;
+var decliningCities;
+
 function createMap(){
 //function that instantiates the Leaflet map
 
 	var map = L.map('map', {
-		center: [38, -99],
+		center: [40, -98],
 		zoom: 4
 	});
 	//creates the map, centered on the United States
 
-	L.tileLayer('http://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png', {
-		attribution: '&copy; <a href="http://www.opencyclemap.org">OpenCycleMap</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="useiconic.com,">useiconic.com, from the Noun Project</a>&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 		maxZoom: 7
     }).addTo(map);
-		//adds the Open Street Map tile set, restricts zoom
+		//adds the tile set, restricts zoom
 
 		getData(map);
 		//calls the function getData
@@ -74,13 +77,24 @@ function pointToLayer(feature, latlng, attributes){
 	var attribute = attributes[0];
   //determines which attribute to visualize with proportional symbol
 
+var growingCities = feature.properties.growing === "true";
 
+console.log(growingCities);
 	var options = {
+	//	if (feature.properties.growing = "true"){
     fillColor: "#33adff",
     color: "#000",
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8
+	// }
+	// else {
+	// 	fillColor: "#330033",
+  //   color: "#000",
+  //   weight: 1,
+  //   opacity: 1,
+  //   fillOpacity: 0.8
+	// }
   };
   //creates the options for the markers
 
@@ -90,7 +104,14 @@ function pointToLayer(feature, latlng, attributes){
   options.radius = calcPropRadius(attValue);
   //gives each feature's circle marker a radius based on its attribute value
 
+	// if (feature.properties.growing === "true") {
+	// 	options.class = "growing";
+	// } else if (feature.properties.growing === "false") {
+	// 	options.class = "declining";
+	// }
+
   var layer = L.circleMarker(latlng, options);
+	console.log(layer);
   //creates circle marker layer
 
 	var popup = new Popup(feature.properties, attribute, layer, options.radius);
@@ -151,8 +172,8 @@ function getCircleValues(map, attribute){
 		};
 	});
 
-	var mean = (max + min) / 2;
-	//set mean
+	var mean = Math.round((max + min) / 2);
+	//set mean, round to a whole number
 
 	return {
 		max: max,
@@ -162,9 +183,9 @@ function getCircleValues(map, attribute){
 	};
 };
 
-/*function updateLegend(map, attribute){
-	var year = attribute.split("_")[1];
-	var content = "Population in " + year;
+function updateLegend(map, attribute){
+	var year = attribute.split("Pop")[1];
+	var content = "<h3>Population in " + year + "</h3>";
 
 	$('#temporal-legend').html(content);
 
@@ -174,13 +195,13 @@ function getCircleValues(map, attribute){
 		var radius = calcPropRadius(circleValues[key]);
 
 		$('#'+key).attr({
-			cy: 59 - radius,
+			cy: 90 - radius,
 			r: radius
 		});
 
-		$('#'+key+'-text').text(Math.round(circleValues[key]*100)/100 + " million");
+		$('#'+key+'-text').text(Math.round(circleValues[key]*100)/100);
 	};
-};*/
+};
 
 function updatePropSymbols(map, attribute){
 	map.eachLayer(function(layer){
@@ -270,6 +291,54 @@ $('.range-slider').on('input', function(){
 	});
 };
 
+function createLegend(map, attributes){
+    var LegendControl = L.Control.extend({
+        options: {
+            position: 'bottomright'
+        },
+
+        onAdd: function (map) {
+
+            var container = L.DomUtil.create('div', 'legend-control-container');
+						//create the control container with a particular class name
+
+            $(container).append('<div id="temporal-legend">')
+						//add temporal legend div to container
+
+            var svg = '<svg id="attribute-legend" width="170px" height="90px">';
+						//start attribute legend svg string
+
+						//array of circle names to base loop on
+						var circles = {
+		            max: 20,
+		            mean: 40,
+		            min: 60
+		        };
+
+		        for (var circle in circles){
+		            //circle string
+		            svg += '<circle class="legend-circle" id="' + circle + '" fill="#33adff" fill-opacity="0.8" stroke="#000000" cx="45"/>';
+
+		            //text string
+		            svg += '<text id="' + circle + '-text" x="90" y="' + circles[circle] + '"></text>';
+		        };
+						//loop to add each circle and text to svg string
+
+        svg += "</svg>";
+				//close svg string
+
+            $(container).append(svg);
+						//add attribute legend svg to container
+
+            return container;
+        }
+    });
+
+    map.addControl(new LegendControl());
+
+    updateLegend(map, attributes[0]);
+};
+
 function processData(data){
 //builds an attributes array from the data
 	var attributes = [];
@@ -289,11 +358,29 @@ function processData(data){
 	return attributes;
 };
 
-$('.menu-ui a').on('click', function() {
-		var filter = $(this).data('filter');
-		$(this).addClass('active').siblings().removeClass('active');
-});
-//fifth interaction operator
+// function createButtons(attributes) {
+// 	$('.menu-ui a').on('click', function() {
+// 			var filter = $(this).data('filter');
+// 			$(this).addClass('active').siblings().removeClass('active');
+// 			if (filter === "all") {
+// 				//console.log(filter);
+// 				//show all the cities
+// 			} else if (filter === "growing") {
+// 				filter function(attributes){
+// 					return feature.properties.growing;
+// 				}
+// 				//console.log(filter);
+// 				//show cities where growing === true
+// 			} else if (filter === "declining") {
+// 				filter function(attributes){
+// 					return feature.properties.growing = false;
+// 				}
+// 				//show cities where growing === false
+// 				// console.log(filter);
+// 			}
+// 	});
+// }
+// fifth interaction operator
 
 function getData(map){
 //import geojson data
@@ -303,8 +390,46 @@ function getData(map){
 				//loads the data from USCitiesPop.geojson
 					var attributes = processData(response);
 
+
+					function createButtons(attributes) {
+						$('.menu-ui a').on('click', function() {
+								var filter = $(this).data('filter');
+								$(this).addClass('active').siblings().removeClass('active');
+								if (filter === "all") {
+
+									//createPropSymbols(response, map, attributes);
+									//console.log(filter);
+									//show all the cities
+								} else if (filter === "growing") {
+
+									growingCities = L.geoJson(response, {
+			                filter: function(feature, layer) {
+			                    return feature.properties.growing === "true";
+														createPropSymbols(response, map, attributes);
+									}
+								});
+
+								growingCities.addTo(map);
+								console.log(growingCities);
+									//console.log(filter);
+									//show cities where growing === true
+								} else if (filter === "declining") {
+								// 	L.geoJson(response, {
+								// 			filter: function(feature, layer) {
+								// 				createPropSymbols(response, map, attributes);
+								// 					return feature.properties.growing === "false";
+								// 	}
+								// })
+									//show cities where growing === false
+									// console.log(filter);
+								}
+						});
+					}
+
 					createPropSymbols(response, map, attributes);
 					createSequenceControls(map, attributes);
+					createLegend(map, attributes);
+					createButtons(attributes);
 					//create an attributes array
 	        }
 	    });
