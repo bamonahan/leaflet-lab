@@ -5,14 +5,11 @@ seen major population growth in that time period, to contrast. Population data w
 from the census bureau; time stamps are from the first year of every decade
 since 1950. */
 
-var growingCities;
-var decliningCities;
-
 function createMap(){
 //function that instantiates the Leaflet map
 
 	var map = L.map('map', {
-		center: [40, -98],
+		center: [36, -98],
 		zoom: 4
 	});
 	//creates the map, centered on the United States
@@ -72,7 +69,7 @@ function Popup(properties, attribute, layer, radius){
 };
 
 function pointToLayer(feature, latlng, attributes){
-//converts markers to circle markers
+//converts the markers to circle markers
 
 	var attribute = attributes[0];
   //determines which attribute to visualize with proportional symbol
@@ -82,11 +79,11 @@ var growingCities = feature.properties.growing === "true";
 console.log(growingCities);
 	var options = {
 	//	if (feature.properties.growing = "true"){
-    fillColor: "#33adff",
+    fillColor: "#00b3b3",
     color: "#000",
     weight: 1,
     opacity: 1,
-    fillOpacity: 0.8
+    fillOpacity: 0.7
 	// }
 	// else {
 	// 	fillColor: "#330033",
@@ -128,9 +125,6 @@ console.log(growingCities);
 		mouseout: function(){
 			this.closePopup();
 		},
-		//click: function(){
-			//$("#panel").html(popupContent);
-		//}
 	});
 	//opens popup on hover
 
@@ -153,7 +147,7 @@ function getCircleValues(map, attribute){
 //Calculate the max, mean, and min values for a given attribute
 	var min = Infinity,
 		max = -Infinity;
-		//start with min at highest possible and max at lowest possible number
+		//start with min at the highest possible and max at the lowest possible number
 
 	map.eachLayer(function(layer){
 		//get the attribute value
@@ -167,7 +161,7 @@ function getCircleValues(map, attribute){
 
 			if (attributeValue > max){
 				max = attributeValue;
-			////test for max
+			//test for max
 			};
 		};
 	});
@@ -186,10 +180,13 @@ function getCircleValues(map, attribute){
 function updateLegend(map, attribute){
 	var year = attribute.split("Pop")[1];
 	var content = "<h3>Population in " + year + "</h3>";
+	//adds the updated year to the legend
 
 	$('#temporal-legend').html(content);
+	//replaces the legend content
 
 	var circleValues = getCircleValues(map, attribute);
+	//gets the max, min, and mean values as an object
 
 	for (var key in circleValues){
 		var radius = calcPropRadius(circleValues[key]);
@@ -200,6 +197,7 @@ function updateLegend(map, attribute){
 		});
 
 		$('#'+key+'-text').text(Math.round(circleValues[key]*100)/100);
+		//gets the radius
 	};
 };
 
@@ -211,7 +209,6 @@ function updatePropSymbols(map, attribute){
 			//access feature properties
 			var	radius = calcPropRadius(props[attribute]);
 			layer.setRadius(radius);
-
 			createPopup(props, attribute, layer, radius);
 			//update each feature's radius based on new attribute values
 		};
@@ -296,6 +293,7 @@ function createLegend(map, attributes){
         options: {
             position: 'bottomright'
         },
+				//function to create the legend
 
         onAdd: function (map) {
 
@@ -308,24 +306,25 @@ function createLegend(map, attributes){
             var svg = '<svg id="attribute-legend" width="170px" height="90px">';
 						//start attribute legend svg string
 
-						//array of circle names to base loop on
 						var circles = {
-		            max: 20,
-		            mean: 40,
-		            min: 60
+		            max: 35,
+		            mean: 60,
+		            min: 85
 		        };
+						//array of circle names to base loop on
 
 		        for (var circle in circles){
-		            //circle string
-		            svg += '<circle class="legend-circle" id="' + circle + '" fill="#33adff" fill-opacity="0.8" stroke="#000000" cx="45"/>';
-
-		            //text string
-		            svg += '<text id="' + circle + '-text" x="90" y="' + circles[circle] + '"></text>';
-		        };
 						//loop to add each circle and text to svg string
+		            svg += '<circle class="legend-circle" id="' + circle + '" fill="#00b3b3" fill-opacity="0.7" stroke="#000000" cx="45"/>';
+								//circle string
+
+		            svg += '<text id="' + circle + '-text" x="90" y="' + circles[circle] + '"></text>';
+								//text string
+		        };
+
 
         svg += "</svg>";
-				//close svg string
+				//close the svg string
 
             $(container).append(svg);
 						//add attribute legend svg to container
@@ -389,7 +388,6 @@ function getData(map){
         success: function(response){
 				//loads the data from USCitiesPop.geojson
 					var attributes = processData(response);
-
 
 					function createButtons(attributes) {
 						$('.menu-ui a').on('click', function() {
