@@ -1,7 +1,8 @@
 
 #map {
-  height: 658px;
   width: 68.5%;
+  height: 658px;
+  overflow: scroll;
   display: inline-block;
   float: right;
   position: relative;
@@ -20,7 +21,7 @@
 
 #panel {
   width: 29.5%;
-  height: 650px;
+  height: 88.3%;
   font-family: sans-serif;
   float: left;
   display: inline-block;
@@ -90,19 +91,22 @@ hr {
   height: 30px;
   background-color: #e6ffff;
   padding: 10px;
+  bottom: 5%;
   line-height: 45px;
   text-align: center;
   border: solid gray 1px;
   opacity: 70%;
+  position: relative;
 }
 
 .legend-control-container {
   width: 150px;
   height: 140px;
-  right: 20px;
+  right: 5%;
   background-color: #e6ffff;
   border: solid gray 1px;
   padding: 5px;
+  bottom: 5%;
 
 }
 

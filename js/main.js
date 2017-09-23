@@ -17,6 +17,7 @@ function createMap(){
 		attribution: '&copy; <a href="useiconic.com,">useiconic.com, from the Noun Project</a>&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 		minZoom: 4, maxZoom: 8
     }).addTo(map);
+		$(window).on("resize", function () { $("#map").height($(window).height()-80); map.invalidateSize(); }).trigger("resize");
 		//adds the tile set, restricts zoom
 
 		getData(map);
