@@ -15,7 +15,7 @@ function createMap(){
 
 	L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="useiconic.com,">useiconic.com, from the Noun Project</a>&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-		maxZoom: 7
+		minZoom: 4, maxZoom: 8
     }).addTo(map);
 		//adds the tile set, restricts zoom
 
